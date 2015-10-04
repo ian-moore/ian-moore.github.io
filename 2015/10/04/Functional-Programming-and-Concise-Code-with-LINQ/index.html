@@ -70,8 +70,8 @@
 <p>This works perfectly, but isn’t very clean. For something so simple, it’s unnecessarily complex: lots of temporary variables, nested loops and conditions, and it’s pretty long for only 1 real meaningful section (the last loop).</p>
 <h2 id="Functional_Approach_with_LINQ">Functional Approach with LINQ</h2><p>By transforming our logic into LINQ expressions, we can convert our procedural looping and conditionals into simple functional expressions.</p>
 <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> user <span class="keyword">in</span> otherUsers.Where(o =&gt; !originalUsers.Any(<span class="keyword">u</span> =&gt; <span class="keyword">u</span>.Name == o.Name)))</span><br><span class="line">&#123;</span><br><span class="line">	MakeUser(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>This reduces all of the above code into 3 lines, and 1 loop. I find this much easier to understand - as long as you know LINQ, it’s very obvious what this one line of code does.</p>
-<p><strong>But why is there still a foreach loop?</strong></p>
+<p>This reduces all of the above code into 3 lines, and 1 loop. I find this much easier to understand - as long as you know LINQ, it’s very obvious what this one line of code does. Approaching C# from a functional perspective and utilizing LINQ has really helped clean up the code I write.</p>
+<p><strong>Sidenote: But why is there still a foreach loop?</strong></p>
 <p>Yeah, it’s very possible to replace the last loop with something like: <code>.Select(u =&gt; MakeUser(u))</code> however LINQ collections are lazily evaluated, which means you wouldn’t actually be calling your function until iterating through the list. This is why only the List type has a <code>.ForEach</code> function, as it’s already a defined set.</p>
 
       
